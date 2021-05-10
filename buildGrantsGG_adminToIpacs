@@ -1,0 +1,13 @@
+begin
+
+for y in (
+select table_name from all_tables
+where owner = 'IPACS'
+and table_name  like 'SND%'
+)
+
+loop
+execute immediate('GRANT SELECT, INSERT, UPDATE, DELETE ON ipacs.'||y.table_name'|| TO gg_admin;')
+end loop;
+
+end;
